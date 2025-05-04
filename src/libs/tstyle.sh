@@ -55,6 +55,17 @@ _TS_ERASE_EID="\e[J"
 _TS_ERASE_CUES="\e[0J"
 _TS_LINE_CLS="\e[K"
 
+# Disable colours
+if [[ -n "$NO_COLOR" ]]; then
+  for v in $(set); do
+    if [[ "$v" == "_TS_RESET" ]] || [[ "$v" == "_TS_BOLD" ]] || [[ "$v" == "_TS_UNDERLINE" ]]; then
+      declare "${v%%=*}"=""
+    elif [[ "$v" == _TS_FG_* ]] || [[ "$v" == _TS_BG_* ]]; then
+      declare "${v%%=*}"=""
+    fi
+  done
+fi
+
 # theme
 _TS_LEVEL_PAD_CHAR="  "
 _TS_TITLE_WIDTH=40
